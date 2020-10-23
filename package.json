@@ -1,0 +1,48 @@
+{
+  "name": "rn-dashed-circular-indicator",
+  "version": "1.0.0",
+  "description": "A simple fully customizable Dashed Circular indicator for React Native",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/naheed-shamim/rn-dashed-circular-indicator.git"
+  },
+  "keywords": [
+    "react-native",
+    "progress",
+    "bar",
+    "circular",
+    "progress",
+    "bar",
+    "circular",
+    "indicator",
+    "mobile",
+    "ios",
+    "progress",
+    "indicator",
+    "dashed-indicator",
+    "dashed-progress",
+    "dashed-circular-indicator",
+    "dashed-circular-progress"
+  ],
+  "author": "Naheed Shamim",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/naheed-shamim/rn-dashed-circular-indicator/issues"
+  },
+  "homepage": "https://github.com/naheed-shamim/rn-dashed-circular-indicator#readme",
+  "peerDependencies": {
+    "react": "16.13.1",
+    "react-native": "0.63.3",
+    "react-native-svg": "^12.1.0"
+  },
+  "dependencies": {
+    "prop-types": "^15.7.2"
+  },
+  "devDependencies": {
+    "metro-react-native-babel-preset": "^0.63.0"
+  }
+}
