@@ -6,19 +6,26 @@ import { StyleSheet, View } from "react-native";
 /* ------------------------ CONSTANTS ------------------------  */
 const DEFAULT_RADIUS = 60;
 const MAX_VALUE = 10;
-const INITIAL_ANGLE_DISPLACEMENT = -30;
+
+const Direction = {
+  CLOCKSWISE: -1,
+  ANTI_CLOCKWISE: 1,
+};
 
 const DashedCircularIndicator = ({
   maxValue = MAX_VALUE,
   selectedValue = 2,
   radius = DEFAULT_RADIUS,
-  strokeWidth = 10,
-  valueUnits = "%",
+  strokeWidth = radius / 10,
+  label = "",
   activeStrokeColor = "#05a168",
   inactiveStrokeColor = "#ddd",
-  unitFontSize = 20,
-  valueFontSize = 35,
+  backgroundColor = "#fff",
+  unitFontSize = Math.floor(radius / 3),
+  valueFontSize = Math.floor(radius / 2.5),
   withGradient = false,
+  anticlockwise = false,
+  initialAngularDisplacement = 0,
 }) => {
   // ----  PIE calculation funciton --------
   const generatePie = (value) => {
@@ -39,9 +46,13 @@ const DashedCircularIndicator = ({
 
   // ----  PIE render funciton --------
   const renderPie = (i) => {
+    const DIRECTION = anticlockwise ? Direction.ANTI_CLOCKWISE : Direction.CLOCKSWISE;
     //Rotation Calculation
     const primaryRotationAngle = (maxValue - 1) * (360 / maxValue);
-    const rotationAngle = INITIAL_ANGLE_DISPLACEMENT + i * primaryRotationAngle;
+    const rotationAngle =
+      DIRECTION * initialAngularDisplacement +
+      -1 * DIRECTION * primaryRotationAngle +
+      i * DIRECTION * primaryRotationAngle;
     const rotationTransformation = `rotate(${rotationAngle}, ${radius}, ${radius})`;
 
     const pieValue = calculatePieValue(maxValue);
@@ -61,7 +72,7 @@ const DashedCircularIndicator = ({
     return [...Array(maxValue + 1)].map((e, i) => renderPie(i));
   };
 
-  const unitsTextView = (
+  const labelView = (
     <Text
       fill='#000'
       fontSize={unitFontSize}
@@ -69,12 +80,11 @@ const DashedCircularIndicator = ({
       y={radius + unitFontSize}
       textAnchor='middle'
     >
-      {valueUnits}
+      {label}
     </Text>
   );
 
-  const textValueY = !!valueUnits ? radius : radius + valueFontSize / 3;
-  const unitValueY = !!valueUnits ? radius : radius + valueFontSize / 3;
+  const textValueY = !!label ? radius : radius + valueFontSize / 3;
 
   // --------  MAIN Render --------
   return (
@@ -83,7 +93,7 @@ const DashedCircularIndicator = ({
         {renderOuterCircle()}
 
         {/* This is the overlay circle */}
-        <Circle r={radius - strokeWidth} cx={radius} cy={radius} fill={"#fff"} />
+        <Circle r={radius - strokeWidth} cx={radius} cy={radius} fill={backgroundColor} />
 
         <Text
           fill='#000'
@@ -95,7 +105,7 @@ const DashedCircularIndicator = ({
         >
           {selectedValue}
         </Text>
-        {!!valueUnits.length && unitsTextView}
+        {!!label.length && labelView}
       </Svg>
     </View>
   );
@@ -106,7 +116,7 @@ DashedCircularIndicator.propTypes = {
   selectedValue: PropTypes.number,
   radius: PropTypes.number,
   strokeWidth: PropTypes.number,
-  valueUnits: PropTypes.string,
+  label: PropTypes.string,
   activeStrokeColor: PropTypes.string,
   inactiveStrokeColor: PropTypes.string,
   unitFontSize: PropTypes.number,
