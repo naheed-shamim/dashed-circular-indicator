@@ -1,7 +1,6 @@
 {
   "name": "circular-progress-indicator",
   "version": "1.0.0",
-  
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
@@ -10,6 +9,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "dashed-circular-indicator": "file:../dashed-circular-indicator-1.0.0.tgz",
     "react": "16.13.1",
     "react-native": "0.63.3",
     "react-native-svg": "^12.1.0"

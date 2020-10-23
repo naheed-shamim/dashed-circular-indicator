@@ -1,5 +1,5 @@
 {
-  "name": "rn-dashed-circular-indicator",
+  "name": "dashed-circular-indicator",
   "version": "1.0.0",
   "description": "A simple fully customizable Dashed Circular indicator for React Native",
   "main": "index.js",
