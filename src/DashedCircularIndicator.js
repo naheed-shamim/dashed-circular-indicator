@@ -1,9 +1,8 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import { Path, Svg, Circle, Text } from "react-native-svg";
 import { StyleSheet, View } from "react-native";
-import PropTypes from "prop-types";
-
 /* ------------------------ CONSTANTS ------------------------  */
 const DEFAULT_RADIUS = 60;
 const MAX_VALUE = 10;
@@ -102,13 +101,7 @@ const DashedCircularIndicator = ({
   );
 };
 
-export default React.memo(DashedCircularIndicator);
-
-const styles = StyleSheet.create({
-  container: { padding: 10 },
-});
-
-CircularProgressIndicator.propTypes = {
+DashedCircularIndicator.propTypes = {
   maxValue: PropTypes.number,
   selectedValue: PropTypes.number,
   radius: PropTypes.number,
@@ -120,6 +113,12 @@ CircularProgressIndicator.propTypes = {
   valueFontSize: PropTypes.number,
   withGradient: PropTypes.bool,
 };
+
+export default React.memo(DashedCircularIndicator);
+
+const styles = StyleSheet.create({
+  container: { padding: 10 },
+});
 
 // ------------------------ UTILITY FUNCTION ------------------------
 

@@ -8,7 +8,6 @@
 
 import React from "react";
 import { SafeAreaView, ScrollView, StatusBar, StyleSheet } from "react-native";
-import { Colors } from "react-native/Libraries/NewAppScreen";
 import DashedCircularIndicator from "dashed-circular-indicator";
 
 const App = () => {
@@ -16,12 +15,17 @@ const App = () => {
     <>
       <StatusBar barStyle='dark-content' />
       <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior='automatic'
-          style={styles.scrollView}
-        ></ScrollView>
-        <DashedCircularIndicator selectedValue={8} />
-        <DashedCircularIndicator selectedValue={8} radius={150} valueFontSize={50} />
+        <ScrollView contentInsetAdjustmentBehavior='automatic' style={styles.scrollView}>
+          <DashedCircularIndicator selectedValue={8} />
+          <DashedCircularIndicator
+            selectedValue={45}
+            maxValue={50}
+            radius={150}
+            activeStrokeColor='#ff0aa0'
+            valueFontSize={50}
+            withGradient
+          />
+        </ScrollView>
       </SafeAreaView>
     </>
   );
@@ -29,7 +33,7 @@ const App = () => {
 
 const styles = StyleSheet.create({
   scrollView: {
-    backgroundColor: Colors.lighter,
+    backgroundColor: "#fff",
   },
 });
 
