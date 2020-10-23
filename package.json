@@ -1,5 +1,5 @@
 {
-  "name": "rn-dashed-circular-indicator",
+  "name": "dashed-circular-indicator",
   "version": "1.0.0",
   "description": "A simple fully customizable Dashed Circular indicator for React Native",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/naheed-shamim/rn-dashed-circular-indicator.git"
+    "url": "git+https://github.com/naheed-shamim/dashed-circular-indicator.git"
   },
   "keywords": [
     "react-native",
@@ -31,9 +31,9 @@
   "author": "Naheed Shamim",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/naheed-shamim/rn-dashed-circular-indicator/issues"
+    "url": "https://github.com/naheed-shamim/dashed-circular-indicator/issues"
   },
-  "homepage": "https://github.com/naheed-shamim/rn-dashed-circular-indicator#readme",
+  "homepage": "https://github.com/naheed-shamim/dashed-circular-indicator#readme",
   "peerDependencies": {
     "react": "16.13.1",
     "react-native": "0.63.3",
