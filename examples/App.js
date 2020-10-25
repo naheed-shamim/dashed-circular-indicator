@@ -8,7 +8,7 @@
 
 import React from "react";
 import { SafeAreaView, ScrollView, StatusBar, StyleSheet, View } from "react-native";
-import DashedCircularIndicator from "dashed-circular-indicator";
+import { DashedCircularIndicator } from "rn-dashed-circular-indicator";
 
 const App = () => {
   return (

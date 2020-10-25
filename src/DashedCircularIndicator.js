@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-
 import { Path, Svg, Circle, Text } from "react-native-svg";
 import { StyleSheet, View } from "react-native";
 /* ------------------------ CONSTANTS ------------------------  */
@@ -12,7 +11,7 @@ const Direction = {
   ANTI_CLOCKWISE: 1,
 };
 
-export const DashedCircularIndicator = React.memo(
+const DashedCircularIndicator = React.memo(
   ({
     maxValue = MAX_VALUE,
     selectedValue = 2,
@@ -60,7 +59,7 @@ export const DashedCircularIndicator = React.memo(
       const dValue = generatePie(pieValue);
 
       const activeColor = withGradient
-        ? shadeColor(activeStrokeColor, (i + 1) * 5)
+        ? shadeColor(activeStrokeColor, (i + 1) * maxValue/50)
         : activeStrokeColor;
 
       const fillColor = i <= selectedValue ? activeColor : inactiveStrokeColor;
@@ -127,6 +126,8 @@ DashedCircularIndicator.propTypes = {
   anticlockwise: PropTypes.bool,
   initialAngularDisplacement: PropTypes.number,
 };
+
+export { DashedCircularIndicator };
 
 const styles = StyleSheet.create({
   container: { padding: 10 },
