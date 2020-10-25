@@ -12,104 +12,106 @@ const Direction = {
   ANTI_CLOCKWISE: 1,
 };
 
-const DashedCircularIndicator = ({
-  maxValue = MAX_VALUE,
-  selectedValue = 2,
-  radius = DEFAULT_RADIUS,
-  strokeWidth = radius / 10,
-  label = "",
-  activeStrokeColor = "#05a168",
-  inactiveStrokeColor = "#ddd",
-  backgroundColor = "#fff",
-  unitFontSize = Math.floor(radius / 3),
-  valueFontSize = Math.floor(radius / 2.5),
-  withGradient = false,
-  anticlockwise = false,
-  initialAngularDisplacement = 0,
-}) => {
-  // ----  PIE calculation funciton --------
-  const generatePie = (value) => {
-    const x = radius - Math.cos((2 * Math.PI) / (100 / value)) * radius;
-    const y = radius + Math.sin((2 * Math.PI) / (100 / value)) * radius;
-    const long = value <= 50 ? 0 : 1;
-    const d = `M${radius},${radius} L${radius},${0}, A${radius},${radius} 0 ${long},1 ${y},${x} Z`;
+export const DashedCircularIndicator = React.memo(
+  ({
+    maxValue = MAX_VALUE,
+    selectedValue = 2,
+    radius = DEFAULT_RADIUS,
+    strokeWidth = radius / 10,
+    label = "",
+    activeStrokeColor = "#05a168",
+    inactiveStrokeColor = "#ddd",
+    backgroundColor = "#fff",
+    unitFontSize = Math.floor(radius / 3),
+    valueFontSize = Math.floor(radius / 2.5),
+    withGradient = false,
+    anticlockwise = false,
+    initialAngularDisplacement = 0,
+  }) => {
+    // ----  PIE calculation funciton --------
+    const generatePie = (value) => {
+      const x = radius - Math.cos((2 * Math.PI) / (100 / value)) * radius;
+      const y = radius + Math.sin((2 * Math.PI) / (100 / value)) * radius;
+      const long = value <= 50 ? 0 : 1;
+      const d = `M${radius},${radius} L${radius},${0}, A${radius},${radius} 0 ${long},1 ${y},${x} Z`;
 
-    return d;
-  };
+      return d;
+    };
 
-  //----  PIE Area calculation  --------
-  const calculatePieValue = (numberOfBars) => {
-    const angle = 360 / numberOfBars;
-    const pieValue = Math.floor(angle / 4);
-    return pieValue < 1 ? 1 : Math.floor(angle / 4);
-  };
+    //----  PIE Area calculation  --------
+    const calculatePieValue = (numberOfBars) => {
+      const angle = 360 / numberOfBars;
+      const pieValue = Math.floor(angle / 4);
+      return pieValue < 1 ? 1 : Math.floor(angle / 4);
+    };
 
-  // ----  PIE render funciton --------
-  const renderPie = (i) => {
-    const DIRECTION = anticlockwise ? Direction.ANTI_CLOCKWISE : Direction.CLOCKSWISE;
-    //Rotation Calculation
-    const primaryRotationAngle = (maxValue - 1) * (360 / maxValue);
-    const rotationAngle =
-      DIRECTION * initialAngularDisplacement +
-      -1 * DIRECTION * primaryRotationAngle +
-      i * DIRECTION * primaryRotationAngle;
-    const rotationTransformation = `rotate(${rotationAngle}, ${radius}, ${radius})`;
+    // ----  PIE render funciton --------
+    const renderPie = (i) => {
+      const DIRECTION = anticlockwise ? Direction.ANTI_CLOCKWISE : Direction.CLOCKSWISE;
+      //Rotation Calculation
+      const primaryRotationAngle = (maxValue - 1) * (360 / maxValue);
+      const rotationAngle =
+        DIRECTION * initialAngularDisplacement +
+        -1 * DIRECTION * primaryRotationAngle +
+        i * DIRECTION * primaryRotationAngle;
+      const rotationTransformation = `rotate(${rotationAngle}, ${radius}, ${radius})`;
 
-    const pieValue = calculatePieValue(maxValue);
-    const dValue = generatePie(pieValue);
+      const pieValue = calculatePieValue(maxValue);
+      const dValue = generatePie(pieValue);
 
-    const activeColor = withGradient
-      ? shadeColor(activeStrokeColor, (i + 1) * 5)
-      : activeStrokeColor;
+      const activeColor = withGradient
+        ? shadeColor(activeStrokeColor, (i + 1) * 5)
+        : activeStrokeColor;
 
-    const fillColor = i <= selectedValue ? activeColor : inactiveStrokeColor;
+      const fillColor = i <= selectedValue ? activeColor : inactiveStrokeColor;
 
-    return <Path key={i} d={dValue} fill={fillColor} transform={rotationTransformation} />;
-  };
+      return <Path key={i} d={dValue} fill={fillColor} transform={rotationTransformation} />;
+    };
 
-  // ----  Creates a circle by combining the Pie(s) --------
-  const renderOuterCircle = () => {
-    return [...Array(maxValue + 1)].map((e, i) => renderPie(i));
-  };
+    // ----  Creates a circle by combining the Pie(s) --------
+    const renderOuterCircle = () => {
+      return [...Array(maxValue + 1)].map((e, i) => renderPie(i));
+    };
 
-  const labelView = (
-    <Text
-      fill='#000'
-      fontSize={unitFontSize}
-      x={radius}
-      y={radius + unitFontSize}
-      textAnchor='middle'
-    >
-      {label}
-    </Text>
-  );
+    const labelView = (
+      <Text
+        fill='#000'
+        fontSize={unitFontSize}
+        x={radius}
+        y={radius + unitFontSize}
+        textAnchor='middle'
+      >
+        {label}
+      </Text>
+    );
 
-  const textValueY = !!label ? radius : radius + valueFontSize / 3;
+    const textValueY = !!label ? radius : radius + valueFontSize / 3;
 
-  // --------  MAIN Render --------
-  return (
-    <View style={styles.container}>
-      <Svg width={radius * 2} height={radius * 2}>
-        {renderOuterCircle()}
+    // --------  MAIN Render --------
+    return (
+      <View style={styles.container}>
+        <Svg width={radius * 2} height={radius * 2}>
+          {renderOuterCircle()}
 
-        {/* This is the overlay circle */}
-        <Circle r={radius - strokeWidth} cx={radius} cy={radius} fill={backgroundColor} />
+          {/* This is the overlay circle */}
+          <Circle r={radius - strokeWidth} cx={radius} cy={radius} fill={backgroundColor} />
 
-        <Text
-          fill='#000'
-          fontSize={valueFontSize}
-          fontWeight='bold'
-          x={radius}
-          y={textValueY}
-          textAnchor='middle'
-        >
-          {selectedValue}
-        </Text>
-        {!!label.length && labelView}
-      </Svg>
-    </View>
-  );
-};
+          <Text
+            fill='#000'
+            fontSize={valueFontSize}
+            fontWeight='bold'
+            x={radius}
+            y={textValueY}
+            textAnchor='middle'
+          >
+            {selectedValue}
+          </Text>
+          {!!label.length && labelView}
+        </Svg>
+      </View>
+    );
+  }
+);
 
 DashedCircularIndicator.propTypes = {
   maxValue: PropTypes.number,
@@ -122,9 +124,9 @@ DashedCircularIndicator.propTypes = {
   unitFontSize: PropTypes.number,
   valueFontSize: PropTypes.number,
   withGradient: PropTypes.bool,
+  anticlockwise: PropTypes.bool,
+  initialAngularDisplacement: PropTypes.number,
 };
-
-export default React.memo(DashedCircularIndicator);
 
 const styles = StyleSheet.create({
   container: { padding: 10 },
