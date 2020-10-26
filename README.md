@@ -2,7 +2,7 @@
 
 Dashed Circular Indicator for React Native using react-native-svg.
 
-<img src="https://github.com/naheed-shamim/git-assets/blob/main/dashed-circular-indicator/rd-dashed-circular-view.jpg" width="30%">
+<img src="https://github.com/naheed-shamim/git-assets/blob/main/dashed-circular-indicator/rd-dashed-circular-view.jpg" width="70%">
 
 ## Installation
 
