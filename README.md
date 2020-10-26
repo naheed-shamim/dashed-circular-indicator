@@ -6,7 +6,7 @@ Dashed Circular Indicator for React Native using react-native-svg.
 
 ## Installation
 
-`$ npm install react-native-progress --save`
+`$ npm install rn-dashed-circular-indicator --save`
 
 ### SVG based components
 
