@@ -7,8 +7,8 @@
  */
 
 import React from "react";
-import { SafeAreaView, ScrollView, StatusBar, StyleSheet } from "react-native";
-import DashedCircularIndicator from "dashed-circular-indicator";
+import { SafeAreaView, ScrollView, StatusBar, StyleSheet, View } from "react-native";
+import { DashedCircularIndicator } from "rn-dashed-circular-indicator";
 
 const App = () => {
   return (
@@ -16,15 +16,32 @@ const App = () => {
       <StatusBar barStyle='dark-content' />
       <SafeAreaView>
         <ScrollView contentInsetAdjustmentBehavior='automatic' style={styles.scrollView}>
-          <DashedCircularIndicator selectedValue={8} />
-          <DashedCircularIndicator
-            selectedValue={45}
-            maxValue={50}
-            radius={150}
-            activeStrokeColor='#ff0aa0'
-            valueFontSize={50}
-            withGradient
-          />
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <DashedCircularIndicator selectedValue={8} />
+            <DashedCircularIndicator
+              selectedValue={25}
+              maxValue={50}
+              textColor='#f00'
+              activeStrokeColor='#cc6600'
+              withGradient
+            />
+            <DashedCircularIndicator
+              selectedValue={75}
+              maxValue={100}
+              radius={100}
+              activeStrokeColor='#0f4fff'
+              withGradient
+            />
+            <DashedCircularIndicator
+              selectedValue={55}
+              maxValue={90}
+              radius={80}
+              activeStrokeColor='#cc6633'
+              withGradient
+              anticlockwise
+              containerStyle={{ padding: 0 }}
+            />
+          </View>
         </ScrollView>
       </SafeAreaView>
     </>
