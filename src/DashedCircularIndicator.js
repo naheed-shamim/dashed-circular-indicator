@@ -11,21 +11,23 @@ const Direction = {
   ANTI_CLOCKWISE: 1,
 };
 
-const DashedCircularIndicator = React.memo(
+export const DashedCircularIndicator = React.memo(
   ({
     maxValue = MAX_VALUE,
-    selectedValue = 2,
+    selectedValue = 0,
     radius = DEFAULT_RADIUS,
     strokeWidth = radius / 10,
     label = "",
     activeStrokeColor = "#05a168",
     inactiveStrokeColor = "#ddd",
     backgroundColor = "#fff",
-    unitFontSize = Math.floor(radius / 3),
+    textColor = '#000',
+    labelFontSize = Math.floor(radius / 3),
     valueFontSize = Math.floor(radius / 2.5),
     withGradient = false,
     anticlockwise = false,
     initialAngularDisplacement = 0,
+    containerStyle
   }) => {
     // ----  PIE calculation funciton --------
     const generatePie = (value) => {
@@ -74,10 +76,10 @@ const DashedCircularIndicator = React.memo(
 
     const labelView = (
       <Text
-        fill='#000'
-        fontSize={unitFontSize}
+        fill={textColor}
+        fontSize={labelFontSize}
         x={radius}
-        y={radius + unitFontSize}
+        y={radius + labelFontSize}
         textAnchor='middle'
       >
         {label}
@@ -88,7 +90,7 @@ const DashedCircularIndicator = React.memo(
 
     // --------  MAIN Render --------
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, containerStyle]}>
         <Svg width={radius * 2} height={radius * 2}>
           {renderOuterCircle()}
 
@@ -96,7 +98,7 @@ const DashedCircularIndicator = React.memo(
           <Circle r={radius - strokeWidth} cx={radius} cy={radius} fill={backgroundColor} />
 
           <Text
-            fill='#000'
+            fill={textColor}
             fontSize={valueFontSize}
             fontWeight='bold'
             x={radius}
@@ -120,14 +122,13 @@ DashedCircularIndicator.propTypes = {
   label: PropTypes.string,
   activeStrokeColor: PropTypes.string,
   inactiveStrokeColor: PropTypes.string,
-  unitFontSize: PropTypes.number,
+  labelFontSize: PropTypes.number,
   valueFontSize: PropTypes.number,
   withGradient: PropTypes.bool,
   anticlockwise: PropTypes.bool,
   initialAngularDisplacement: PropTypes.number,
 };
 
-export { DashedCircularIndicator };
 
 const styles = StyleSheet.create({
   container: { padding: 10 },

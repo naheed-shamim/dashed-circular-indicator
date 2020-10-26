@@ -34,13 +34,9 @@
     "url": "https://github.com/naheed-shamim/dashed-circular-indicator/issues"
   },
   "homepage": "https://github.com/naheed-shamim/dashed-circular-indicator#readme",
-  "peerDependencies": {
-    "react": "16.13.1",
-    "react-native": "0.63.3",
-    "react-native-svg": "^12.1.0"
-  },
   "dependencies": {
-    "prop-types": "^15.7.2"
+    "prop-types": "^15.7.2",
+    "react-native-svg": ">=6.5.1"
   },
   "devDependencies": {
     "metro-react-native-babel-preset": "^0.63.0"
