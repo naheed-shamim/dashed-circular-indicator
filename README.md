@@ -1,3 +1,8 @@
+[![npm version](https://badge.fury.io/js/rn-dashed-circular-indicator.svg)](http://badge.fury.io/js/rn-dashed-circular-indicator)
+[![npm total downloads](https://img.shields.io/npm/dt/rn-dashed-circular-indicator.svg)](https://img.shields.io/npm/dt/rn-dashed-circular-indicator.svg)
+[![npm weekly downloads](https://img.shields.io/npm/dw/rn-dashed-circular-indicator.svg)](https://img.shields.io/npm/dw/rn-dashed-circular-indicator.svg)
+
+
 # rn-dashed-circular-indicator
 
 Dashed Circular Indicator for React Native using react-native-svg.
